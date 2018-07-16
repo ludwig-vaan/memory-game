@@ -165,13 +165,28 @@ const timer = startTimer => {
 
 const win = () => {
 	countSuccess++;
+	let starResult = "";
+	switch (true) {
+		case moveCounter < 15:
+			starResult = "three stars";
+			break;
+		case moveCounter < 20:
+			starResult = "two stars";
+			break;
+		case moveCounter < 30:
+			starResult = "one star";
+			break;
+		default:
+			starResult = "0 star";
+			break;
+	}
 	if (countSuccess === 8) {
 		let modal = document.querySelector(".modal");
 		document.querySelector(
 			"#modal-text"
 		).innerHTML = `With ${moveCounter} moves in ${parseInt(
 			timeAttack
-		)} sec! </br> Wooooooooooooo ! `;
+		)} sec!</br> you win with <strong>${starResult}</strong> </br> Wooooooooooooo ! `;
 		let modalObject = M.Modal.getInstance(modal);
 		modalObject.open();
 		clearInterval(myTimer);
