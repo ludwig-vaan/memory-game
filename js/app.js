@@ -1,9 +1,21 @@
+/*
+ *  Variable
+*/
+
+// Timer
 let myTimer = 0;
+// number of matching pairs
 let countSuccess = 0;
+// List of open card
 let openCards = [];
+// counter of move during a game
 let moveCounter = 0;
+// count time spend to play
 let timeAttack = 0;
 
+/*
+ *  DOM elements
+*/
 const counter = document.querySelector(".moves");
 const container = document.querySelector(".containerC");
 const restart = document.querySelector(".restart");
@@ -49,11 +61,15 @@ function shuffle(array) {
 	return array;
 }
 
+/*
+ *  Create a new shuffled deck and displayed it
+*/
 const displayCard = () => {
 	const shuffledDeck = shuffle(deckList);
 
 	memoryDeck.remove(memoryDeck);
 
+	// create dom element to display the new deck
 	const newMemoryDeck = document.createElement("ul");
 	newMemoryDeck.className = "deckC";
 	newMemoryDeck.id = "memory-deck";
@@ -71,12 +87,16 @@ const displayCard = () => {
 	// add each card's HTML to the page
 	container.appendChild(newMemoryDeck);
 
-	// reassign
+	// reassign the dom variable
 	memoryDeck = document.querySelector("#memory-deck");
 
+	// add listener to each card to flip it
 	listenerForEachCard();
 };
 
+/*
+ *  count move during a game & change the score panel
+*/
 const onMoveCounter = () => {
 	++moveCounter;
 
@@ -96,14 +116,23 @@ const onMoveCounter = () => {
 	}
 };
 
+/*
+ *  display a card
+*/
 const showCard = card => {
 	card.parentElement.className = "card open show";
 };
 
+/*
+ *  reset open card list
+*/
 const resetOpenCards = () => {
 	openCards.length = 0;
 };
 
+/*
+ *  Flip card and test if its matching or not ( also star the timer)
+*/
 const flipCard = e => {
 	const card = e.currentTarget.firstElementChild;
 	if (openCards.length === 0) {
@@ -127,6 +156,9 @@ const flipCard = e => {
 	}
 };
 
+/*
+ *  Animate matching cards & remove it from the open card list
+*/
 const matchCards = cards => {
 	cards.forEach(card => {
 		card.parentElement.className = "rubberBand animated card match";
@@ -135,6 +167,9 @@ const matchCards = cards => {
 	resetOpenCards();
 };
 
+/*
+ *  Animate wrong cards & remove it from open card list & flip it
+*/
 const notMatchCards = cards => {
 	cards.forEach(card => {
 		card.parentElement.className = "card incorect shake animated";
@@ -154,6 +189,9 @@ const notMatchCards = cards => {
 	}, 500);
 };
 
+/*
+ *  calculate & display time spend to play
+*/
 const timer = startTimer => {
 	displayTimer.textContent = 0;
 	myTimer = setInterval(() => {
@@ -163,6 +201,9 @@ const timer = startTimer => {
 	}, 1000);
 };
 
+/*
+ *  Open the winning modal with scores informations
+*/
 const win = () => {
 	countSuccess++;
 	let starResult = "";
@@ -193,14 +234,18 @@ const win = () => {
 	}
 };
 
+/*
+ *  reset a game
+*/
 const reset = () => {
+	// reset variable
 	countSuccess = 0;
 	openCards.length = 0;
 	moveCounter = 0;
 	counter.textContent = 0;
 	displayTimer.textContent = 0;
 
-	// reset stars
+	// reset score panel
 	let score = document.querySelector(".stars");
 	for (let index = 0; index < 3; index++) {
 		if (
@@ -211,9 +256,14 @@ const reset = () => {
 		}
 	}
 
+	// create a new suffled deck
 	displayCard();
 	clearInterval(myTimer);
 };
+
+/*
+ *  events listeners
+*/
 
 // Listener to Flip Cards
 const listenerForEachCard = () => {
