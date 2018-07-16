@@ -2,38 +2,25 @@
  *  Variable
 */
 
-// Timer
-let myTimer = 0;
-// number of matching pairs
-let countSuccess = 0;
-// List of open card
-let openCards = [];
-// counter of move during a game
-let moveCounter = 0;
-// count time spend to play
-let timeAttack = 0;
+let myTimer = 0,
+	countSuccess = 0,
+	openCards = [],
+	moveCounter = 0,
+	timeAttack = 0;
 
 /*
  *  DOM elements
 */
-const counter = document.querySelector(".moves");
-const container = document.querySelector(".containerC");
-const restart = document.querySelector(".restart");
-const displayTimer = document.querySelector(".timer");
-let memoryDeck = document.querySelector("#memory-deck");
+const counter = document.querySelector(".moves"),
+	container = document.querySelector(".containerC"),
+	restart = document.querySelector(".restart"),
+	displayTimer = document.querySelector(".timer"),
+	memoryDeck = document.querySelector("#memory-deck");
 
 /*
  * List that holds all of your cards
  */
-const deckList = [
-	"fa-gem",
-	"fa-paper-plane",
-	"fa-anchor",
-	"fa-bolt",
-	"fa-cube",
-	"fa-bomb",
-	"fa-leaf",
-	"fa-bicycle",
+let deckList = [
 	"fa-gem",
 	"fa-paper-plane",
 	"fa-anchor",
@@ -43,6 +30,8 @@ const deckList = [
 	"fa-leaf",
 	"fa-bicycle"
 ];
+// duplicate deckList
+deckList = [...deckList, ...deckList];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
