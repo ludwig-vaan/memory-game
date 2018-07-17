@@ -14,8 +14,9 @@ let myTimer = 0,
 const counter = document.querySelector(".moves"),
 	container = document.querySelector(".containerC"),
 	restart = document.querySelector(".restart"),
-	displayTimer = document.querySelector(".timer"),
-	memoryDeck = document.querySelector("#memory-deck");
+	displayTimer = document.querySelector(".timer");
+
+let memoryDeck = document.querySelector("#memory-deck");
 
 /*
  * List that holds all of your cards
